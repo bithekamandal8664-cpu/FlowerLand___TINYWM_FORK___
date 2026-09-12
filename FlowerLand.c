@@ -29,7 +29,11 @@ int main(void)
         if (fork() == 0) {
     execlp("waybar", "waybar", NULL);
     _exit(1);
-}
+    }
+       if (fork() == 0) {
+           execlp("waypaper", "--restore", NULL);
+           _exit(1);
+    }
     start.subwindow = None;
     for(;;)
     {
