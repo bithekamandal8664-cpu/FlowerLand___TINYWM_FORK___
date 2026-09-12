@@ -17,7 +17,7 @@ int main(void)
     XEvent ev;
 
     if(!(dpy = XOpenDisplay(0x0))) return 1;
-        XGrabKey(dpy, XKeysymToKeyCode(dpy, XStringToKeysym("Return")), Mod4Mask,
+        XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Return")), Mod4Mask,
             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
     XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F1")), Mod1Mask,
             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
