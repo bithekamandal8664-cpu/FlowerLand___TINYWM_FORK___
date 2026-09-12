@@ -31,7 +31,7 @@ int main(void)
     _exit(1);
     }
        if (fork() == 0) {
-           execlp("waypaper", "--restore", NULL);
+           execlp("waypaper", "waypaper", "--restore", NULL);
            _exit(1);
     }
     start.subwindow = None;
