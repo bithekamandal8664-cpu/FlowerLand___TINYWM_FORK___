@@ -6,8 +6,44 @@
 
 #include <X11/Xlib.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+char terminal[64] = "xterm";
+char bar[64] = "polybar";
+char wallpaper[256] = "";
+
+void load_config(void)
+{
+        char path[256];
+    char *home = getenv("HOME");
+
+    if (!home) return;
+
+    snprintf(path, sizeof(path),
+             "%s/.config/FlowerLand/config", home);
+
+    FILE *fp = fopen(path, "r");
+    if (!fp) return;
+
+    char line[256];
+
+    while (fgets(line, sizeof(line), fp)) {
+        if (strncmp(line, "terminal=", 9) == 0)
+            sscanf(line + 9, "%63s", terminal);
+
+        else if (strncmp(line, "bar=", 4) == 0)
+            sscanf(line + 4, "%63s", bar);
+
+        else if(strncmp(line, "wallpaper=", 10) == 0)
+            sscanf(line + 10, "%255s", wallpaper);
+    }
+
+    fclose(fp);
+}
 
 int main(void)
 {
@@ -15,6 +51,8 @@ int main(void)
     XWindowAttributes attr;
     XButtonEvent start;
     XEvent ev;
+
+        load_config();
 
     if(!(dpy = XOpenDisplay(0x0))) return 1;
         XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Return")), Mod4Mask,
@@ -27,11 +65,11 @@ int main(void)
             ButtonPressMask|ButtonReleaseMask|PointerMotionMask, GrabModeAsync, GrabModeAsync, None, None);
 
         if (fork() == 0) {
-    execlp("waybar", "waybar", NULL);
+    execlp(bar, bar, NULL);
     _exit(1);
     }
        if (fork() == 0) {
-           execlp("waypaper", "waypaper", "--restore", NULL);
+           execlp("feh", "feh", "--bg-fill", wallpaper, NULL);
            _exit(1);
     }
     start.subwindow = None;
@@ -40,7 +78,7 @@ int main(void)
         XNextEvent(dpy, &ev);
         if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return"))) {
                 if (fork() == 0) {
-                        execlp("kitty", "kitty", NULL);
+                        execlp(terminal, terminal, NULL);
                         _exit(1);
                 }
         }
