@@ -4,7 +4,7 @@ This window manager is basically a fork of TinyWM and renamed to FlowerLand :3
 just copy the file and compile? (i think?)
 and ywah, add config file so you can edit easiky like this
 ```bash
-bar="your bar'
+bar="your bar"
 terminal="your terminal"
 wallpaper="your wallpaper"
 ```
