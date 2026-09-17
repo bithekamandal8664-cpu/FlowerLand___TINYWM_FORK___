@@ -8,11 +8,13 @@ bar="your bar"
 terminal="your terminal"
 wallpaper="your wallpaper"
 ```
+here's how to run it:-
 ```bash
 wget https://raw.githubusercontent.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___/refs/heads/main/FlowerLand.c
 mkdir ~/.config/FlowerLand/
 touch ~/.config/FlowerLand/config
 gcc FlowerLand.c -o FlowerLand -lX11
+./FlowerLand
 ```
 and if you are in X11 session, try to leave and test it in TTY, 
 ## WARNING
