@@ -15,7 +15,6 @@
 char terminal[64] = "xterm";
 char bar[64] = "polybar";
 char wallpaper[256] = "";
-int window_count = 0;
 void tile(Display *dpy, int screen, Window windows[], int window_count)
 {
     int width = DisplayWidth(dpy, screen);
@@ -67,6 +66,9 @@ void load_config(void)
 int main(void)
 {
     Display * dpy;
+    int screen;
+    Window windows[32];
+    int window_count = 0;
     XWindowAttributes attr;
     XButtonEvent start;
     XEvent ev;
