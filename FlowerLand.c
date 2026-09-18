@@ -16,7 +16,7 @@ char terminal[64] = "xterm";
 char bar[64] = "polybar";
 char wallpaper[256] = "";
 int window_count = 0;
-void tile(void)
+void tile(Display *dpy, int screen, Window windows[], int window_count)
 {
     int width = DisplayWidth(dpy, screen);
     int height = DisplayHeight(dpy, screen);
@@ -101,7 +101,7 @@ int main(void)
     if (window_count < 32) {
         windows[window_count++] = win;
         XMapWindow(dpy, win);
-        tile();
+        tile(dpy, screen, windows, window_count);
     }
         }
         if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return"))) {
