@@ -15,7 +15,26 @@
 char terminal[64] = "xterm";
 char bar[64] = "polybar";
 char wallpaper[256] = "";
+int window_count = 0;
+void tile(void)
+{
+    int width = DisplayWidth(dpy, screen);
+    int height = DisplayHeight(dpy, screen);
 
+    for (int i = 0; i < window_count; i++) {
+        if (i == 0)
+            XMoveResizeWindow(dpy, windows[i], 0, 0,
+                              width / 2, height);
+        else
+            XMoveResizeWindow(dpy, windows[i],
+                              width / 2,
+                              (i - 1) * height / (window_count - 1),
+                              width / 2,
+                              height / (window_count - 1));
+    }
+
+    XFlush(dpy);
+}
 void load_config(void)
 {
         char path[256];
@@ -76,6 +95,15 @@ int main(void)
     for(;;)
     {
         XNextEvent(dpy, &ev);
+ if (ev.type == MapRequest) {
+    Window win = ev.xmaprequest.window;
+
+    if (window_count < 32) {
+        windows[window_count++] = win;
+        XMapWindow(dpy, win);
+        tile();
+    }
+        }
         if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return"))) {
                 if (fork() == 0) {
                         execlp(terminal, terminal, NULL);
