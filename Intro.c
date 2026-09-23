@@ -1,9 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <raylib.h>
 #include <string.h>
 #include <stdbool.h>
 
 #define INPUT_SIZE 100
 
+void SaveConfig(const char *terminal, const char *bar)
+{
+        chdir(".config");
+
+    FILE *fp = fopen("FlowerLand/config", "w");
+
+    fprintf(fp,
+        "terminal=%s\n"
+        "bar=%s\n",
+        terminal,
+        bar
+    );
+
+    fclose(fp);
+}
 void InputText(char *buffer, int max_len)
 {
     int key = GetCharPressed();
@@ -35,10 +53,12 @@ int main(void)
     InitWindow(1920, 1080, "Introduction to FlowerLand");
     SetTargetFPS(120);
 
+    Rectangle button1      = { 800, 600, 320, 100 };
     Rectangle button       = { 800, 450, 320, 100 };
     Rectangle terminal_box = { 520, 320, 700, 50 };
     Rectangle status_box   = { 520, 400, 700, 50 };
 
+    bool save = false;
     bool started = false;
     bool typing_terminal = true;
     bool typing_status_bar = false;
@@ -49,12 +69,20 @@ int main(void)
         bool hovering_terminal = CheckCollisionPointRec(mouse, terminal_box);
         bool hovering_status   = CheckCollisionPointRec(mouse, status_box);
         bool hovering_button   = CheckCollisionPointRec(mouse, button);
+        bool hovering_button1  = CheckCollisionPointRec(mouse, button1);
 
         bool input_triggered = IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsGestureDetected(GESTURE_TAP);
 
         if (input_triggered) {
             if (!started && hovering_button) {
                 started = true;
+            }
+            else if(started && hovering_button1) {
+                save = true;
+                if(save) {
+                        SaveConfig(terminal, status_bar);
+                        save = false;
+                }
             }
             else if (started) {
                 if (hovering_terminal) {
@@ -94,6 +122,9 @@ int main(void)
         else {
             DrawText("Choose startup apps", 100, 100, 40, DARKBLUE);
 
+            DrawText("Terminal:", 520, 285, 25, DARKBLUE);
+            DrawText("Status bar:", 520, 365, 25, DARKBLUE);
+
             DrawRectangleRec(terminal_box, LIGHTGRAY);
             DrawRectangleRec(status_box, LIGHTGRAY);
 
@@ -111,6 +142,8 @@ int main(void)
 
             DrawText(terminal, terminal_box.x + 12, terminal_box.y + 10, 30, DARKBLUE);
             DrawText(status_bar, status_box.x + 12, status_box.y + 10, 30, DARKBLUE);
+            DrawRectangleRec(button1, hovering_button1 ? SKYBLUE : LIGHTGRAY);
+            DrawText("Save", 920, 635, 35, DARKBLUE);
         }
 
         EndDrawing();
