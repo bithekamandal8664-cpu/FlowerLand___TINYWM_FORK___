@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "Flower.h"
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
@@ -85,14 +86,11 @@ int main(void)
     XGrabButton(dpy, 3, Mod1Mask, DefaultRootWindow(dpy), True,
             ButtonPressMask|ButtonReleaseMask|PointerMotionMask, GrabModeAsync, GrabModeAsync, None, None);
 
-        if (fork() == 0) {
-    execlp(bar, bar, NULL);
-    _exit(1);
-    }
+       flower_launch(bar);
        if (fork() == 0) {
            execlp("feh", "feh", "--bg-fill", wallpaper, NULL);
            _exit(1);
-    }
+       }
     start.subwindow = None;
     for(;;)
     {
