@@ -77,7 +77,9 @@ int main(void)
         load_config();
 
     if(!(dpy = XOpenDisplay(0x0))) return 1;
-        XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Return")), Mod4Mask,
+    XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Q")), Mod4Mask,
+            DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+    XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Return")), Mod4Mask,
             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
     XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("F1")), Mod1Mask,
             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
@@ -104,6 +106,9 @@ int main(void)
         if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return"))) {
                flower_launch(terminal);
         }
+        if(ev.type == KeyPress && ev.xkey.keycode == XkeysymToKeycode(dpy, XStringToKeysym("Q"))) {
+               flower_exit(dpy);
+        }    
         if(ev.type == KeyPress && ev.xkey.subwindow != None)
             XRaiseWindow(dpy, ev.xkey.subwindow);
         else if(ev.type == ButtonPress && ev.xbutton.subwindow != None)
