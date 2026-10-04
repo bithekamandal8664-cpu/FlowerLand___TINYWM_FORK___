@@ -87,10 +87,7 @@ int main(void)
             ButtonPressMask|ButtonReleaseMask|PointerMotionMask, GrabModeAsync, GrabModeAsync, None, None);
 
        flower_launch(bar);
-       if (fork() == 0) {
-           execlp("feh", "feh", "--bg-fill", wallpaper, NULL);
-           _exit(1);
-       }
+       flower_wallpaper(wallpaper);
     start.subwindow = None;
     for(;;)
     {
@@ -105,10 +102,7 @@ int main(void)
     }
         }
         if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Return"))) {
-                if (fork() == 0) {
-                        execlp(terminal, terminal, NULL);
-                        _exit(1);
-                }
+               flower_launch(terminal);
         }
         if(ev.type == KeyPress && ev.xkey.subwindow != None)
             XRaiseWindow(dpy, ev.xkey.subwindow);
