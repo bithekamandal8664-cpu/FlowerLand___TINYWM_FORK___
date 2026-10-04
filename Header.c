@@ -9,7 +9,7 @@ void flower_launch(const char *program) {
 }
 void flower_wallpaper(const char *wallpaper) {
   if (fork() == 0) {
-      execlp("feh", "feh", wallpaper, NULL);
+      execlp("feh", "feh", "--bg-fill", wallpaper, NULL);
       _exit(1);
   }
 }
