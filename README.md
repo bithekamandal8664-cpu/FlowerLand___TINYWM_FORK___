@@ -14,7 +14,7 @@ git clone https:/github.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___
 cd ~/FlowerLand___TINYWM_FORK___
 mkdir ~/.config/FlowerLand/
 touch ~/.config/FlowerLand/config
-gcc FlowerLand.c Header.c -include -o FlowerLand -lX11
+gcc FlowerLand.c Header.c -o FlowerLand -lX11
 ./FlowerLand
 ```
 and if you are in X11 session, try to leave and test it in TTY, 
