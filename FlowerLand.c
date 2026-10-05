@@ -35,17 +35,11 @@ void tile(Display *dpy, int screen, Window windows[], int window_count)
 
     XFlush(dpy);
 }
-void load_config(void)
-{
-        char path[256];
-    char *home = getenv("HOME");
+void load_config(void){
 
-    if (!home) return;
+    chdir(".config/FlowerLand");
 
-    snprintf(path, sizeof(path),
-             "%s/.config/FlowerLand/config", home);
-
-    FILE *fp = fopen(path, "r");
+    FILE *fp = fopen("config", "r");
     if (!fp) return;
 
     char line[256];
