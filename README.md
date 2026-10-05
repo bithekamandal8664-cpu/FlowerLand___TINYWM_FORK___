@@ -10,10 +10,8 @@ wallpaper="your wallpaper"
 ```
 here's how to run
 ```bash
-git clone https://github.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___
-cd ~/FlowerLand___TINYWM_FORK___
 mkdir ~/.config/FlowerLand/
-touch ~/.config/FlowerLand/config
+touch ~/.configFlowerLandd/config
 gcc FlowerLand.c Header.c -o FlowerLand -lX11
 ./FlowerLand
 ```
