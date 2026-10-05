@@ -19,4 +19,4 @@ gcc FlowerLand.c Header.c -o FlowerLand -lX11
 ```
 and if you are in X11 session, try to leave and test it in TTY, 
 ## WARNING
-this window manager has no exit command, will be added later :3
+this window manager runs Xserver (x11) which is old to today's standard, but you can use it of you want:3
