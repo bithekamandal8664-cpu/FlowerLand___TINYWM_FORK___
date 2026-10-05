@@ -10,6 +10,9 @@ wallpaper="your wallpaper"
 ```
 here's how to run
 ```bash
+wget https://raw.githubusercontent.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___/refs/heads/main/Flower.h
+wget https://raw.githubusercontent.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___/refs/heads/main/Header.c
+https://raw.githubusercontent.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___/refs/heads/main/FlowerLand.c
 mkdir ~/.config/FlowerLand/
 touch ~/.configFlowerLandd/config
 gcc FlowerLand.c Header.c -o FlowerLand -lX11
