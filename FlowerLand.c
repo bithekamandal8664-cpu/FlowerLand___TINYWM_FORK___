@@ -100,7 +100,7 @@ int main(void)
         if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("1"))) {
                flower_launch(terminal);
         }
-        if(ev.type == KeyPress && ev.xkey.keycode == XkeysymToKeycode(dpy, XStringToKeysym("Q"))) {
+        if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("Q"))) {
                flower_exit(dpy);
         }    
         if(ev.type == KeyPress && ev.xkey.subwindow != None)
