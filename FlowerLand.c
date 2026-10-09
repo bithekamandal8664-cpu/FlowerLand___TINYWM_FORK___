@@ -16,6 +16,8 @@
 char terminal[64] = "xterm";
 char bar[64] = "polybar";
 char wallpaper[256] = "";
+char FileMgr[256] = "thunar";
+
 void tile(Display *dpy, int screen, Window windows[], int window_count)
 {
     int width = DisplayWidth(dpy, screen);
@@ -53,6 +55,9 @@ void load_config(void){
 
         else if(strncmp(line, "wallpaper=", 10) == 0)
             sscanf(line + 10, "%255s", wallpaper);
+            
+        else if(strncmp(line, "file-manager=", 13) == 0)
+            sscanf(line + 13, " %255s", FileMgr);
     }
 
     fclose(fp);
@@ -73,6 +78,8 @@ int main(void)
     if(!(dpy = XOpenDisplay(0x0))) return 1;
     
     XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Q")), Mod4Mask,
+            DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
+    XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("E")), Mod1Mask,
             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
     XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Return")), Mod4Mask,
             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
@@ -97,6 +104,9 @@ int main(void)
         XMapWindow(dpy, win);
         tile(dpy, screen, windows, window_count);
     }
+        }
+        if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("E"))) {
+               flower_launch(FileMgr);
         }
         if(ev.type == KeyPress && ev.xkey.keycode == XKeysymToKeycode(dpy, XStringToKeysym("1"))) {
                flower_launch(terminal);
