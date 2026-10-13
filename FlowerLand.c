@@ -76,6 +76,7 @@ int main(void)
         load_config();
 
     if(!(dpy = XOpenDisplay(0x0))) return 1;
+    int screen = DefaultScreen(dpy);
     
     XGrabKey(dpy, XKeysymToKeycode(dpy, XStringToKeysym("Q")), Mod4Mask,
             DefaultRootWindow(dpy), True, GrabModeAsync, GrabModeAsync);
