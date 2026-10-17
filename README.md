@@ -14,7 +14,7 @@ wget https://raw.githubusercontent.com/bithekamandal8664-cpu/FlowerLand___TINYWM
 wget https://raw.githubusercontent.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___/refs/heads/main/Header.c
 wget https://raw.githubusercontent.com/bithekamandal8664-cpu/FlowerLand___TINYWM_FORK___/refs/heads/main/FlowerLand.c
 mkdir ~/.config/FlowerLand/
-touch ~/.configFlowerLandd/config
+touch ~/.config/FlowerLand/config
 gcc FlowerLand.c Header.c -o FlowerLand -lX11
 ./FlowerLand
 ```
