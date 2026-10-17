@@ -66,7 +66,6 @@ void load_config(void){
 int main(void)
 {
     Display * dpy;
-    int screen;
     Window windows[32];
     int window_count = 0;
     XWindowAttributes attr;
