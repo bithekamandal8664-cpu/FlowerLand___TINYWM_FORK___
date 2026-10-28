@@ -21,10 +21,10 @@ void SaveConfig(const char *terminal, const char *bar, const char *wallpaper)
     fprintf(fp,
         "terminal=%s\n"
         "bar=%s\n"
-	"wallpaper=%s\n",
+        "wallpaper=%s\n",
         terminal,
         bar,
-	wallpaper
+        wallpaper
     );
 
     fclose(fp);
@@ -82,7 +82,7 @@ int main(void)
         bool hovering_status   = CheckCollisionPointRec(mouse, status_box);
         bool hovering_button   = CheckCollisionPointRec(mouse, button);
         bool hovering_button1  = CheckCollisionPointRec(mouse, button1);
-	bool hovering_wallpaper  = CheckCollisionPointRec(mouse, wallpaper_box);
+        bool hovering_wallpaper  = CheckCollisionPointRec(mouse, wallpaper_box);
 
         bool input_triggered = IsMouseButtonPressed(MOUSE_BUTTON_LEFT) || IsGestureDetected(GESTURE_TAP);
 
@@ -106,11 +106,11 @@ int main(void)
                     typing_terminal   = false;
                     typing_status_bar = true;
                 }
-		else if (hovering_wallpaper) {
-		    typing_terminal = false;
-		    typing_status_bar = false;
-		    typing_wallpaper = true;
-		}
+                else if (hovering_wallpaper) {
+                    typing_terminal = false;
+                    typing_status_bar = false;
+                    typing_wallpaper = true;
+                }
             }
         }
 
@@ -121,9 +121,9 @@ int main(void)
             else if (typing_status_bar) {
                 InputText(status_bar, INPUT_SIZE);
             }
-	    else if (typing_wallpaper) {
-		InputText(wallpaper, INPUT_SIZE);
-	    }
+            else if (typing_wallpaper) {
+                InputText(wallpaper, INPUT_SIZE);
+            }
         }
 
         BeginDrawing();
@@ -139,20 +139,20 @@ int main(void)
             );
 
             DrawCText("Start", 915, 485, 35, DARKBLUE);
-	    DrawCircle(1890, 1060, 275, CLOUDBLUE);
-	    DrawCircle(1880, 1050, 200, BABYBLUE);
-	    DrawCircle(1870, 1040, 125, DEEPBLUE);
+            DrawCircle(1890, 1060, 275, CLOUDBLUE);
+            DrawCircle(1880, 1050, 200, BABYBLUE);
+            DrawCircle(1870, 1040, 125, DEEPBLUE);
         }
         else {
             DrawCText("Choose startup apps", 100, 100, 40, DARKBLUE);
 
             DrawCText("Terminal:", 520, 285, 25, DARKBLUE);
             DrawCText("Status bar:", 520, 365, 25, DARKBLUE);
-	    DrawCText("wallpaper:", 520, 445, 25, DARKBLUE);
+            DrawCText("wallpaper:", 520, 445, 25, DARKBLUE);
 
             DrawRectangleRec(terminal_box, LIGHTGRAY);
             DrawRectangleRec(status_box, LIGHTGRAY);
-	    DrawRectangleRec(wallpaper_box, LIGHTGRAY);
+            DrawRectangleRec(wallpaper_box, LIGHTGRAY);
 
             if (typing_terminal) {
                 DrawRectangleLinesEx(terminal_box, 3.0f, BLUE);
@@ -166,21 +166,21 @@ int main(void)
                 DrawRectangleLinesEx(status_box, 1.0f, GRAY);
             }
 
-	    if (typing_wallpaper) {
-		DrawRectangleLinesEx(wallpaper_box, 3.0f, BLUE);
-	    } else {
-		DrawRectangleLinesEx(wallpaper_box, 1.0f, GRAY);
-	    }
+            if (typing_wallpaper) {
+                DrawRectangleLinesEx(wallpaper_box, 3.0f, BLUE);
+            } else {
+                DrawRectangleLinesEx(wallpaper_box, 1.0f, GRAY);
+            }
 
             DrawText(terminal, terminal_box.x + 12, terminal_box.y + 10, 30, DARKBLUE);
             DrawText(status_bar, status_box.x + 12, status_box.y + 10, 30, DARKBLUE);
-	    DrawText(wallpaper, wallpaper_box.x + 12, wallpaper_box.y +10, 30, DARKBLUE);
+            DrawText(wallpaper, wallpaper_box.x + 12, wallpaper_box.y +10, 30, DARKBLUE);
 
             DrawRectangleRec(button1, hovering_button1 ? SKYBLUE : LIGHTGRAY);
             DrawCText("Save", 920, 635, 35, DARKBLUE);
-	    DrawCircle(1890, 1060, 275, CLOUDBLUE);
-	    DrawCircle(1880, 1050, 200, BABYBLUE);
-	    DrawCircle(1870, 1040, 125, DEEPBLUE);
+            DrawCircle(1890, 1060, 275, CLOUDBLUE);
+            DrawCircle(1880, 1050, 200, BABYBLUE);
+            DrawCircle(1870, 1040, 125, DEEPBLUE);
         }
 
         EndDrawing();
